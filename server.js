@@ -14,7 +14,8 @@ app.use( cors( {optionSuccessStatus: 200} ) );  // some legacy browsers choke on
 app.use( express.static( 'public' ) );
 
 // http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (req, res) {
+app.get( '/', function( req, res )
+{
   res.sendFile( __dirname + '/views/index.html' );
 } );
 
@@ -22,6 +23,15 @@ app.get("/", function (req, res) {
 app.get( '/api/hello', function( req, res )
 {
   res.json( {greeting: 'hello API'} );
+} );
+
+app.route( '/api/timestamp/' ).get( ( req, res ) =>
+{
+  const timeStamp = new Date();
+  res.json( {
+    'unix': timeStamp.getTime(),
+    'utc': timeStamp.toUTCString(),
+  } );
 } );
 
 app.route( '/api/timestamp/:date_string' ).get( ( req, res ) =>
@@ -47,7 +57,8 @@ app.route( '/api/timestamp/:date_string' ).get( ( req, res ) =>
 } );
 
 // listen for requests :)
-const listener = app.listen( process.env.PORT, function()
+// process.env.PORT
+const listener = app.listen( 3000, function()
 {
   console.log( 'Your app is listening on port ' + listener.address().port );
 } );
