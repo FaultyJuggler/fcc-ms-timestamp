@@ -43,12 +43,11 @@ app.route( '/api/timestamp/:date_string' ).get( ( req, res ) =>
   else
   {
     res.json( {error: 'Invalid Date'} );
-    // res.json( {"unix": null, "utc" : "Invalid Date" } )
   }
 } );
 
 // listen for requests :)
-var listener = app.listen( process.env.PORT, function()
+const listener = app.listen( process.env.PORT, function()
 {
   console.log( 'Your app is listening on port ' + listener.address().port );
 } );
